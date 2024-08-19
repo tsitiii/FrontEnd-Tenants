@@ -1,0 +1,22 @@
+@keyframes beam-flow {
+  0%, 100% {
+    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%);
+  }
+  25% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 2%, 0% 2%);
+  }
+  50% {
+    clip-path: polygon(100% 0%, 100% 100%, 98% 100%, 98% 0%);
+  }
+  75% {
+    clip-path: polygon(100% 100%, 0% 100%, 0% 98%, 100% 98%);
+  }
+  100% {
+    clip-path: polygon(0% 100%, 0% 0%, 2% 0%, 2% 100%);
+  }
+}
+
+.animate-light-beam {
+  animation: beam-flow 3s linear infinite;
+  border-color: white;
+}
