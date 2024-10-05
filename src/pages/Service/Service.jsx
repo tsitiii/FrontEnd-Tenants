@@ -9,13 +9,14 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 import Content from '../../components/Readmore.jsx/Readmore'
 import { MdOutlineQuestionMark } from "react-icons/md";
 import ServiceItem from '../../components/Serviceitem/ServiceItem'
-import { Key } from 'lucide-react'
 import GettingStarted from '../../components/Serviceitem/GettingStarted'
 import Footer from '../../components/Footer/Footer'
+import { motion } from 'framer-motion'
+import { GrSecure } from "react-icons/gr";
 
 const serviceData = [
   {
-    icon: '📝',
+    icon: <GrSecure size={40} />,
     headline: 'Secure Your Rental Agreements',
     paragraph: 'We make it easy for landlords and tenants to create, verify, and register their rental agreements. Ensure your contracts are legally binding, following the latest regulations, and avoid future disputes with our guided registration process.',
   },
@@ -78,7 +79,7 @@ const Service = () => {
         </div>
         <div className='bg-blue-gray-200 -mt-8'>
           <div className='flex justify-center pt-20'>
-            <h2 className='text-white font-bold text-8xl'>Our <span className='text-blue-800'>servies</span></h2>
+            <h2 className='text-zinc-700 font-bold text-8xl'>Our <span className='text-blue-800'>servies</span></h2>
           </div>
           <div className='flex justify-center py-8 '>
             <div className='h-[4px] bg-blue-900 w-20'></div>
@@ -125,7 +126,8 @@ const Service = () => {
             <div className='flex justify-center py-8 mt-6 '>
             <div className='h-[4px] bg-blue-900 w-44'></div>
           </div>
-            <div className="flex flex-wrap justify-center mt-6 sm:mt-10">
+            <motion.div
+             className="flex flex-wrap justify-center mt-6 sm:mt-10 animate-fade-right animate-delay-[2ms]">
                 {serviceData.map((service, index)=>(
                   <ServiceItem 
                   key={index}
@@ -133,7 +135,7 @@ const Service = () => {
                   headline={service.headline}
                   des={service.paragraph}/>
                 ))}
-              </div>
+              </motion.div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center p-6 sm:p-14 mb-6 sm:mb-10">
   <div className="w-full sm:w-[65%] p-4">

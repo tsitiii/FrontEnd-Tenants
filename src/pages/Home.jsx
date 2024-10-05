@@ -4,8 +4,9 @@ import centerImage from "../assets/middle.png";
 import service from "../assets/servicebg.png";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import { motion } from 'framer-motion'
 
-import "../custom/Anime.css";
+// import "../custom/Anime.css";
 
 const Home = () => {
   return (
@@ -22,17 +23,33 @@ const Home = () => {
           <div className="absolute inset-0 bg-blue-800 opacity-60 z-10"></div>
           <div className="relative flex flex-col lg:flex-row sm:ml-10 z-20">
             <div className="relative z-10 p-8 rounded-lg ml-6 w-full lg:w-[500px]">
-              <h1 className="text-4xl md:text-6xl font-bold text-white text-left">
+              <motion.h1 initial={{opacity:0, y:40}}
+              animate={{opacity:1, y:0}}
+              transition={{delay:0.2 ,duration:.5}}
+              viewport={{ once:true, amount:.5}}
+
+               className="text-4xl md:text-6xl font-bold text-white text-left">
                 ETHIOPIA&apos;S RENTAL AGREEMENT SYSTEM
-              </h1>
-              <div className="w-full md:w-[481px] text-left mt-10">
+              </motion.h1>
+              <motion.div
+              initial={{opacity:0, y:40}}
+              animate={{opacity:1, y:0}}
+              transition={{delay:0.4 ,duration:.5}}
+              viewport={{ once:true, amount:.5}}
+              
+               className="w-full md:w-[481px] text-left mt-10">
                 <p className="mt-4 text-white p-0">
                   Ethiopia's trusted platform for secure and efficient rentals
                   system that gives an access for both tenures and tenants a
                   place for rental agreements electronically.
                 </p>
-              </div>
-              <div className="mt-6 py-10 m-2 flex flex-col sm:flex-row gap-4 sm:gap-10 w-full justify-center items-center">
+              </motion.div>
+              <motion.div
+              initial={{opacity:0, y:40}}
+              animate={{opacity:1, y:0}}
+              transition={{delay:0.6 ,duration:.5}}
+              viewport={{ once:true, amount:.5}}
+               className="mt-6 py-10 m-2 flex flex-col sm:flex-row gap-4 sm:gap-10 w-full justify-center items-center">
                 <Link to="/register">
                   <button
                     type="button"
@@ -49,7 +66,7 @@ const Home = () => {
                     Login
                   </button>
                 </Link>
-              </div>
+              </motion.div>
             </div>
             <div className="bg-opacity-95 opacity-30 mt-8 lg:mt-0 hidden md:block">
               <img src={centerImage} alt="Center" className="w-auto h-auto" />
@@ -58,13 +75,18 @@ const Home = () => {
         </header>
 
         {/* About us section */}
-        <section className="h-auto bg-blue-gray-100 pt-4 pb-16" id="About">
+        <motion.section
+        
+        initial={{opacity:0, y:40}}
+        whileInView={{opacity:1,y:0, transition: {delay:0.2,  duration:0.5}}}
+        viewport={{ once:true, amount:.5}}
+         className="h-auto bg-blue-gray-100 pt-4 pb-28" id="About">
           <div className="flex w-full justify-center px-4 sm:px-0">
             <div className="max-w-3xl">
-              <h2 className="font-bold text-3xl sm:text-4xl md:text-6xl drop-shadow-lg text-[#0B3055] text-center p-2 mt-3">
+              <h2 className="font-bold text-3xl sm:text-4xl md:text-6xl drop-shadow-lg text-[#0B3055] text-center p-4 mt-3">
                 ABOUT US
               </h2>
-              <div className="text-center mt-8 sm:mt-12">
+              <div className="text-center mt-8 sm:mt-8">
                 <p className="text-md md:text-lg md:w-[700px]">
                   Rental Agreement is your trusted Ethiopian platform for a
                   secure and streamlined rental experience. We empower both
@@ -81,7 +103,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Services section */}
         <section
@@ -96,13 +118,16 @@ const Home = () => {
             </h2>
             <div className="flex flex-col lg:flex-row h-full w-full justify-around mt-8 lg:mt-16 gap-8 lg:gap-0">
               <div className="flex justify-center lg:justify-start">
-                <div className="text-center lg:text-left">
+                <motion.div initial={{opacity:0, y:40}}
+        whileInView={{opacity:1,y:0, transition: {delay:0.4,  duration:0.5}}}
+        viewport={{ once:true, amount:.5}}
+                 className="text-center lg:text-left">
                   <div className="border-l-2 border-white p-2 md:w-auto md:ml-24 inline-block">
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
                       TENANTS
                     </h2>
                   </div>
-                  <div className="w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-black mt-4 hover:scale-105 hover:border-2 border-white">
+                  <div className="w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-blue-900 mt-4 hover:scale-105 hover:border-2 border-white">
                     <p className="text-base sm:text-lg md:text-xl">
                       Rental Agreement streamlines the process for tenants by
                       offering a user-friendly web application. Browse a diverse
@@ -113,16 +138,19 @@ const Home = () => {
                       pre-defined leases drafted by legal professionals.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
               <div className="flex justify-center lg:justify-start">
-                <div className="text-center lg:text-left">
+                <motion.div  initial={{opacity:0, y:40}}
+        whileInView={{opacity:1,y:0, transition: {delay:0.4,  duration:0.5}}}
+        viewport={{ once:true, amount:.5}}
+                 className="text-center lg:text-left">
                   <div className="border-l-2 border-white p-2 md:w-auto md:ml-24 inline-block">
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
                       TENURES
                     </h2>
                   </div>
-                  <div className="w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-black mt-4 hover:scale-105 hover:border-2 border-white">
+                  <div className="w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-blue-900 mt-4 hover:scale-105 hover:border-2 border-white">
                     <p className="text-base sm:text-lg md:text-xl">
                       Rental Agreement simplifies the process for property
                       owners, offering a platform designed for your success.
@@ -133,7 +161,7 @@ const Home = () => {
                       all within a centralized platform.
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
