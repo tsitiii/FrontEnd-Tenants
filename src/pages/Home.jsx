@@ -127,7 +127,7 @@ const Home = () => {
                       TENANTS
                     </h2>
                   </div>
-                  <div className="w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-blue-900 mt-4 hover:scale-105 hover:border-2 border-white">
+                  <div className="w-[325px] sm:w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-blue-900 mt-4 hover:scale-105 hover:border-2 border-white">
                     <p className="text-base sm:text-lg md:text-xl">
                       Rental Agreement streamlines the process for tenants by
                       offering a user-friendly web application. Browse a diverse
@@ -150,7 +150,7 @@ const Home = () => {
                       TENURES
                     </h2>
                   </div>
-                  <div className="w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-blue-900 mt-4 hover:scale-105 hover:border-2 border-white">
+                  <div className="w-[325px] sm:w-[373px] md:w-[460px] p-6 md:p-10 text-center rounded-[40px] text-white bg-blue-900 mt-4 hover:scale-105 hover:border-2 border-white">
                     <p className="text-base sm:text-lg md:text-xl">
                       Rental Agreement simplifies the process for property
                       owners, offering a platform designed for your success.

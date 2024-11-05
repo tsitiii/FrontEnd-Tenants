@@ -17,29 +17,85 @@ import AddHouseInfo from "./pages/Admin_side/House_Info/AddHouseInfo";
 import Dashboard from "./pages/Admin_side/dashboard/Dashboard";
 import Calendar from "./pages/Admin_side/Calender/Calendar.jsx";
 import Demographics_info from "./pages/Admin_side/Piechart/Demographics_info";
+import ProtectedRoute from "./protectedRoute/ProtectedRoute";
+import UserHome from "./pages/userHome/UserHome";
+import Logout from "./components/Login/Logout";
+// import Unauthorized from "./Unauthorized";
+
+// import UserDetail from "./pages/Admin_side/user/UserDetail";
 
   // You can do this:
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
+    
+        <Route>
         <Route path="/" element={<Home />} />
-         <Route path="/login" element={<Login />} />
+         <Route path="/login" element={<Login/>} />
+         <Route path='/logout' element={<Logout/>} />
          <Route path="/register" element={<Register />} />
          <Route path="/*" element={<Notfound />} />
          <Route path="/about" element={<About />} />
          <Route path="/service" element={<Service />} />
          <Route path="/contact" element={<Contact />} />
-         <Route path="/admin/adduser" element={<AddUser />} />
-         <Route path="/admin/user" element={<User />} />
-         <Route path="/admin/houseinfo" element={<HouseInfo />} />
-         <Route path="/admin/addhouseinfo" element={<AddHouseInfo />} />
-         <Route path="/admin/dashboard" element={<Dashboard />} />
-         <Route path="/admin/calendar" element={<Calendar />} />
-         <Route path="/admin/chart" element={<Demographics_info />} />
+         {/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
+
+
+         <Route
+        path="/admin/adduser"
+        element={
+          <ProtectedRoute role={['is_admin']}>
+            <AddUser />
+          </ProtectedRoute>
+        }
+      />
+          <Route
+        path="/admin/user"
+        element={
+          <ProtectedRoute role={['is_admin']}>
+            <User />
+          </ProtectedRoute>
+        }
+      />
+         {/* <Route path="/admin/userdetail" element={<UserDetail />} /> */}
+         <Route path="/user/userhome" element={ 
+          <ProtectedRoute role={['is_landloard', 'is_tenant']}><UserHome/></ProtectedRoute>} />
+    
+    <Route
+        path="/admin/Houseinfo"
+        element={
+          <ProtectedRoute role={['is_admin']}>
+            <HouseInfo />
+          </ProtectedRoute>
+        }
+      />
+         <Route path="/admin/addhouseinfo" element={
+          
+          <AddHouseInfo />} />
+
+         <Route path="/admin/dashboard" element={<ProtectedRoute role={['is_admin']}><Dashboard/></ProtectedRoute>} />
+         <Route
+        path="/admin/calendar"
+        element={
+          <ProtectedRoute role={['is_admin']}>
+            <Calendar />
+          </ProtectedRoute>
+        }
+      />
+       <Route
+        path="/admin/chart"
+        element={
+          <ProtectedRoute role={['is_admin']}>
+            <Demographics_info />
+          </ProtectedRoute>
+        }
+      />
 
 
          
       </Route>
+
+      
+
     )
   );
 

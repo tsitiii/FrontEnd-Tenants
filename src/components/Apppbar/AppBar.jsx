@@ -2,48 +2,51 @@ import { Button } from "@/components/UI/button"
 // import { Input } from "@/components/UI/input"
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+// import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/components/UI/avatar"
+import Logout from "../Login/Logout";
+import { useAuth } from "@/context/AuthContext";
 
 
 const AppBar = () => {
-  return (
-    <div className="">
-      <div className="flex justify-between px-4 py-2">
+  const {user}= useAuth();
 
-        <div className="flex gap-2">
+  return (
+    <div className="h-[70px] p-3">
+      <div className="flex w-full justify-between gap-1 sm:gap-2   ">
+
+        <div className="flex gap-2  ">
           <input
             type="text"
             placeholder="Search"
-            className="w-32 md:w-48 lg:w-64 focus:bg-blue-50 p-2 outline-none border-2 rounded-md hover:scale-105 transition-transform"
+            className="w-24 sm:w-28 md:w-48 lg:w-64 focus:bg-blue-50 p-2 outline-none border-2 rounded-md hover:scale-105 transition-transform"
           />
-          <Button type="submit" className="p-1 md:p-2">
-            <SearchOutlinedIcon className="text-sm md:text-base lg:text-lg" />
-          </Button>
+        
         </div>
 
         <div className="flex gap-1 md:gap-2">
           <Button className="p-1 md:p-2 group">
-            <NotificationsActiveOutlinedIcon
-              className="text-sm md:text-base lg:text-lg group-hover:animate-bell transition-transform duration-300"
+            <NotificationsActiveOutlinedIcon 
+              className="text-xs  md:text-base lg:text-lg group-hover:animate-bell transition-transform duration-300"
             />
           </Button>
 
            <div className="cursor-pointer">
            <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage src={user.profilePicture} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
            </div>
 
-          <Button className="flex items-center p-1 md:p-2">
-            <LogoutOutlinedIcon className="text-sm md:text-base lg:text-lg" />
-            <span className="hidden md:inline text-sm md:text-base lg:text-lg">Logout</span>
-          </Button>
+           
+           {/* logout component implementation */}
+
+             <Logout />
+         
         </div>
       </div>
     </div>

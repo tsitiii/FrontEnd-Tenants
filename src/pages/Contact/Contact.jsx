@@ -31,10 +31,10 @@ const Contact = () => {
 
 
       <div className='bg-[#f6f6f6]'>
-        <div className='flex flex-col sm:flex-row justify-center items-center gap-5'>
-          <div className='w-[500px] flex flex-col justify-center ml-20 mt-10 sm:-mt-20'>
-             <div className='ml-6 sm:ml-0'>
-             <h2 className='font-bold text-3xl md:text-4xl lg:text-5xl text-center text-blue-900'>Get in touch with us</h2>
+        <div className='flex flex-col sm:flex-row justify-center items-center gap-5 '>
+          <div className='w-full sm:w-[500px] flex flex-col justify-center ml-20 mt-10 sm:-mt-20'>
+             <div className='ml-5 sm:ml-0'>
+             <h2 className='font-bold text-xl sm:text-2xl md:text-4xl lg:text-5xl text-center text-blue-900'>Get in touch with us</h2>
             <p className='font-semibold text-lg sm:text-2xl'>For any questions or comments</p>
             <p>feel free to contact us</p>
             <p className='font-bold'>Help and support</p>
@@ -44,7 +44,7 @@ const Contact = () => {
              </div>
           </div>
 
-          <div className="bg-white mx-auto sm:w-full max-w-[540px] w-[450px] py-16 px-8 rounded-2xl shadow-custom-dark -mt-20 z-10">
+          <div className="bg-white mx-auto w-full max-w-[540px] md:w-[450px] py-16 px-8 rounded-2xl shadow-custom-dark -mt-20 z-10">
             <p className='text-center text-base sm:text-lg font-semibold'>Please fill out the form below to <span className='text-blue-900 font-extrabold'>get in touch with us</span>.</p>
             <IoIosContact className='mx-auto text-6xl text-blue-900' />
             <form className='flex flex-col'>

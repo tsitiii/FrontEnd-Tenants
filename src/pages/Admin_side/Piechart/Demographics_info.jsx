@@ -1,4 +1,9 @@
-import { ResponsivePie } from '@nivo/pie'
+import { useEffect, useState } from 'react';
+import { ResponsivePie } from '@nivo/pie';
+import axios from 'axios';
+import axiosInstance from '@/Api';
+
+
  const data = [
   { id: "Addis Ababa", value: 30 },
   { id: "Afar", value: 2 },
@@ -17,26 +22,41 @@ import { ResponsivePie } from '@nivo/pie'
 ];
 
 const DemographicsInfo = () => {
-  // const data = [
-  //   { id: "Addis Ababa", value: 30 },
-  //   { id: "Afar", value: 2 },
-  //   { id: "Amhara", value: 4 },
-  //   { id: "Oromia", value: 5 },
-  //   { id: "Dire Dawa", value: 7 },
-  //   { id: "Gambella", value: 8 },
-  //   { id: "Harari", value: 6 },
-  //   { id: "Sidama", value: 9 },
-  //   { id: "Somali", value: 7 },
-  //   { id: "Central Ethiopian region", value: 9 },
-  //   { id: "South west 14", value: 7 },
-  //   { id: "South Ethiopia", value: 15 },
-  //   { id: "Benshangul Gumuz", value: 12 },
-  //   { id: "Tigray", value: 7 },
-  // ];
+      const [regionData, setRegionData] = useState([]);
+
+      useEffect(() => {
+         axiosInstance.get('/api/register/', {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((res)=>{
+            const regionCounts= {}
+
+            res.data.forEach((item)=>{
+              const region= item.region
+              if(regionCounts[region]){
+                regionCounts[region] += 1
+              }else{
+                regionCounts[region] = 1
+              }
+            })
+            //Format the data to match the data format of the pie chart
+            const FormattedData = Object.keys(regionCounts).map((region)=>({
+              id: region,
+          value: regionCounts[region],
+            }));
+            setRegionData(FormattedData)
+
+          }) .catch((err)=>{
+            console.log('error', err);
+          })
+      }, []);
+
   return (
       <div className='h-[75vh]'>
           <ResponsivePie
-      data={data}
+      data={regionData}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       padAngle={0.7}
       activeOuterRadiusOffset={8}

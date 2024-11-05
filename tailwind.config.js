@@ -17,8 +17,13 @@ module.exports = {
       },
     },
     extend: {
+      fontSize: {
+        'xxs': '8px',
+        'tiny': '12px',
+      },
       colors: {
         border: "hsl(var(--border))",
+        'custom-dark':'#222831',
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

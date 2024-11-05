@@ -1,132 +1,148 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Box, IconButton, Button, Menu, MenuItem } from "@mui/material";
-import { FaEdit, FaTrashAlt, FaFileAlt } from "react-icons/fa";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import { FaEdit, FaTrashAlt, FaFileAlt } from "react-icons/fa";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SideBar from '../../../components/Sidebar/Sidebar.jsx';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import axiosInstance from "@/Api.jsx";
 // Sample rows matching the columns structure
-const rows = [
-  {
-    id: 1,
-    phoneNumber: "1234567890",
-    region: "Addis Ababa",
-    city: "Addis Ababa",
-    subCity: "Addis Ababa",
-    kebele: "02",
-    uniquePlace: "Place 1",
-    houseNumber: "123",
-    class: 3,
-    condition: "New",
-    rentAmount: 14500,
-    leaseYear: 2,
-    otherPayments: "Landlord",
-    prePayment: 29000,
-    prePaymentMonths: 2,
-    paymentDate: 5,
-    ownershipDocument: "File 2"
-  },
-];
+// const rows = [
+//   {
+//     id: 1,
+//     phoneNumber: "1234567890",
+//     region: "Addis Ababa",
+//     city: "Addis Ababa",
+//     subCity: "Addis Ababa",
+//     kebele: "02",
+//     uniquePlace: "Place 1",
+//     houseNumber: "123",
+//     class: 3,
+//     condition: "New",
+//     rentAmount: 14500,
+//     leaseYear: 2,
+//     otherPayments: "Landlord",
+//     prePayment: 29000,
+//     prePaymentMonths: 2,
+//     paymentDate: 5,
+//     ownershipDocument: "File 2"
+//   },
+// ];
 
 // Define columns for DataGrid
 const columns = [
   { field: "id", headerName: "ID", width:'45',headerClassName: "super-app-theme--header" },
-  { field: "phoneNumber", headerName: "Phone Number", headerClassName: "super-app-theme--header"  },
-  { field: "region", headerName: "Region",  headerClassName: "super-app-theme--header"  },
-  { field: "city", headerName: "City", headerClassName: "super-app-theme--header"   },
-  { field: "subCity", headerName: "Sub City", headerClassName: "super-app-theme--header"   },
-  { field: "kebele", headerName: "Kebele", headerClassName: "super-app-theme--header"   },
-  { field: "uniquePlace", headerName: "Unique Place",
-     headerClassName: "super-app-theme--header"   },
-  { field: "houseNumber", headerName: "House Number", Type:'number',
-     headerClassName: "super-app-theme--header"  },
-  { field: "class", headerName: "Class",  headerClassName: "super-app-theme--header"  },
-  { field: "condition", headerName: "Condition",  headerClassName: "super-app-theme--header"  },
-  { field: "rentAmount", headerName: "Rent Amount (Birr)",  headerClassName: "super-app-theme--header"  },
-  { field: "leaseYear", headerName: "Lease Year",  headerClassName: "super-app-theme--header"  },
-  { field: "otherPayments", headerName: "Other Payments Bills",  headerClassName: "super-app-theme--header"  },
-  { field: "prePayment", headerName: "Pre-payment (Birr)", 
-    Type:'number', headerClassName: "super-app-theme--header"  },
-  { field: "prePaymentMonths", headerName: "Pre-payment (Months)",  headerClassName: "super-app-theme--header"  },
-  { field: "paymentDate", headerName: "Payment Date",  headerClassName: "super-app-theme--header"  },
-  { field: "ownershipDocument", 
-    renderCell: (params) =>
-      params.row.kebeleIdFile ? (
-        <Button variant="contained" startIcon={<FaFileAlt />} href={params.row.kebeleIdFile} download>
-          View
-        </Button>
-      ) : (
-        "No File"
-      ),
-    headerName: "Ownership Document",  headerClassName: "super-app-theme--header"  },
-  {
-    field: "action",
-    headerName: "Action",
-    headerClassName: "super-app-theme--header" ,
+  // { field: "phoneNumber", headerName: "Phone Number", headerClassName: "super-app-theme--header" ,width:'150'},
+  { field: "region", headerName: "Region",  headerClassName: "super-app-theme--header" ,width:'150' },
+  { field: "city", headerName: "City", headerClassName: "super-app-theme--header" ,width:'150' },
+  { field: "sub_city", headerName: "Sub City", headerClassName: "super-app-theme--header"  , width:'150' },
+  { field: "kebele", headerName: "Kebele", headerClassName: "super-app-theme--header" , width:150   },
+  { field: "unique_place", headerName: "Unique Place",
+     headerClassName: "super-app-theme--header"   , width:'140' },
+  { field: "house_number", headerName: "House Number", Type:'number',
+     headerClassName: "super-app-theme--header", width:'135' },
+  { field: "number_of_rooms", headerName: "Class",  headerClassName: "super-app-theme--header" , width:'130' },
+  // { field: "status", headerName: "Condition",  headerClassName: "super-app-theme--header"  },
+//   { field: "rent_amount", headerName: "Rent Amount (Birr)",  headerClassName: "super-app-theme--header"  },
+//   { field: "Lease_year", headerName: "Lease Year",  headerClassName: "super-app-theme--header"  },
+//   { field: "other_bills", headerName: "Other Payments Bills",  headerClassName: "super-app-theme--header"  },
+//   { field: "pre_payment_birr", headerName: "Pre-payment (Birr)", 
+//     Type:'number', headerClassName: "super-app-theme--header"  },
+//   { field: "pre_payment_month", headerName: "Pre-payment (Months)",  headerClassName: "super-app-theme--header"  },
+//   { field: "payment_date", headerName: "Payment Date",  headerClassName: "super-app-theme--header"  },
+//   { field: "document", 
+//     renderCell: (params) =>
+//       params.row.kebeleIdFile ? (
+//         <Button variant="contained" startIcon={<FaFileAlt />} href={params.row.kebeleIdFile} download>
+//           View
+//         </Button>
+//       ) : (
+//         "No File"
+//       ),
+//     headerName: "Ownership Document",  headerClassName: "super-app-theme--header"  },
+//   {
+//     field: "action",
+//     headerName: "Action",
+//     headerClassName: "super-app-theme--header" ,
     
-    renderCell: (params) => <ActionMenu params={params} />,
-  },
+//     renderCell: (params) => <ActionMenu params={params} />,
+//   },
 ];
 
-// Dropdown menu for Edit/Delete actions
-const ActionMenu = ({ params }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+// // Dropdown menu for Edit/Delete actions
+// const ActionMenu = ({ params }) => {
+//   const [anchorEl, setAnchorEl] = useState(null);
+//   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+//   const handleClick = (event) => {
+//     setAnchorEl(event.currentTarget);
+//   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
 
-  const handleEdit = () => {
-    alert(`Editing row ${params.row.id}`);
-    handleClose();
-  };
+//   const handleEdit = () => {
+//     alert(`Editing row ${params.row.id}`);
+//     handleClose();
+//   };
 
-  const handleDelete = () => {
-    alert(`Deleting row ${params.row.id}`);
-    handleClose();
-  };
+//   const handleDelete = () => {
+//     alert(`Deleting row ${params.row.id}`);
+//     handleClose();
+  // };
 
-  return (
-    <>
-      <IconButton onClick={handleClick}>
-        <MoreVertIcon />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <MenuItem onClick={handleEdit}>
-          <FaEdit className="mr-2" />
-          Edit
-        </MenuItem>
-        <MenuItem onClick={handleDelete} style={{ color: "red" }}>
-          <FaTrashAlt className="mr-2" />
-          Delete
-        </MenuItem>
-      </Menu>
-    </>
-  );
-};
+
+//   return (
+//     <>
+//       <IconButton onClick={handleClick}>
+//         <MoreVertIcon />
+//       </IconButton>
+//       <Menu
+//         anchorEl={anchorEl}
+//         open={open}
+//         onClose={handleClose}
+//         anchorOrigin={{
+//           vertical: "top",
+//           horizontal: "right",
+//         }}
+//         transformOrigin={{
+//           vertical: "top",
+//           horizontal: "right",
+//         }}
+//       >
+//         <MenuItem onClick={handleEdit}>
+//           <FaEdit className="mr-2" />
+//           Edit
+//         </MenuItem>
+//         <MenuItem onClick={handleDelete} style={{ color: "red" }}>
+//           <FaTrashAlt className="mr-2" />
+//           Delete
+//         </MenuItem>
+//       </Menu>
+//     </>
+//   );
+// };
 
 // Main component with DataGrid and GridToolbar
 export default function HouseInfo() {
+
   const navigate = useNavigate();
+  const [rows, setRows] = useState([]);
+
+  useEffect(()=>{
+    axiosInstance.get("/api/property/")
+    .then(res=>{
+      console.log(res.data);
+      setRows(res.data);
+    })
+  })
+
+ 
   return (
-    <div className="w-fit flex h-screen bg-[#f5f5ef]">
+    <div className="w-full bg-[#f5f5ef]">
+      <div className='w-full flex h-screen ' >
       <SideBar />
       <Box
          m='40px 0 0 0'
@@ -161,6 +177,8 @@ export default function HouseInfo() {
            "& .MuiDataGrid-columnSeparator": {
             //  display: "none",
            },
+         
+          
          }}
       >
       <h1 className="text-base md:text-2xl lg:text-3xl font-bold ml-8 text-[#3366e8]">Managing House information</h1>
@@ -179,6 +197,7 @@ export default function HouseInfo() {
           }}
         />
       </Box>
+      </div>
     </div>
   );
 }
