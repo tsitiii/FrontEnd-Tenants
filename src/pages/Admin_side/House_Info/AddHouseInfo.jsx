@@ -33,7 +33,7 @@ const AddHouseInfo = () => {
     // const [selectedUserId, setSelectedUserId] = useState(''); 
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/register/')
+        axios.get('https://backend-tenant-tenure-system-u4dz.vercel.app/api/register/')
         .then(res=>{
           console.log(res.data)
             setUsers(res.data)

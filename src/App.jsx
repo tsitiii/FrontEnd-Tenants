@@ -62,12 +62,12 @@ export default function App() {
 
 
         <Route path="/user/userhome" element={
-          <ProtectedRoute role={['is_landloard', 'is_tenant']}><UserHome /></ProtectedRoute>} />
+          <ProtectedRoute role={['is_landloard']}><UserHome /></ProtectedRoute>} />
 
         <Route
           path="/admin/Houseinfo"
           element={
-            <ProtectedRoute role={['is_admin', 'is_tenant']}>
+            <ProtectedRoute role={['is_admin']}>
               <HouseInfo />
             </ProtectedRoute>
           }
@@ -76,7 +76,7 @@ export default function App() {
         <Route
             path="/news"
             element={
-              <ProtectedRoute role={['is_admin', 'is_tenant']}>
+              <ProtectedRoute role={['is_admin']}>
                 <NewsPost />
               </ProtectedRoute>
             }
@@ -84,13 +84,13 @@ export default function App() {
 
 
         <Route path="/admin/addhouseinfo" element={ <AddHouseInfo />} />
-        <Route path="/admin/dashboard" element={<ProtectedRoute role={['is_admin', 'is_tenant']}><Dashboard /></ProtectedRoute>} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute role={['is_admin']}><Dashboard /></ProtectedRoute>} />
         
 
         <Route
             path="/admin/calendar"
             element={
-              <ProtectedRoute role={['is_admin', 'is_tenant']}>
+              <ProtectedRoute role={['is_admin', 'is_tenant', 'is_landlord', 'is_witness']}>
                 <Calendar />
               </ProtectedRoute>
             }
@@ -99,14 +99,12 @@ export default function App() {
         <Route
             path="/admin/chart"
             element={
-              <ProtectedRoute role={['is_admin' , 'is_tenant']}>
+              <ProtectedRoute role={['is_admin']}>
                 <Demographics_info />
               </ProtectedRoute>
             }
         />
     </Routes>
-
-
     </>
   )
 }

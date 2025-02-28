@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { FaRegUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import bgl from '../../assets/bgl.jpg';
-// import { useAuth } from '@/context/AuthContext';
 import { useAuth } from "@/context/useAuth";
 
 
