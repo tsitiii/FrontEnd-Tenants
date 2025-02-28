@@ -3,7 +3,7 @@ import { ACCESS_TOKEN , REFRESH_TOKEN} from './Constant';
 
 
 const axiosInstance=  axios.create({
-    baseURL:"http://localhost:8000",
+    baseURL:"https://backend-tenant-tenure-system-u4dz.vercel.app/",
     withCredentials:true
 })
 
@@ -29,23 +29,18 @@ axiosInstance.interceptors.response.use(
         const originalRequest=error.config;
 
         if(error.response.status===401 && !originalRequest._retry){
-            originalRequest._retry=true; //avoid infinite loop
+            originalRequest._retry=true; 
 
          try{
             const refresh= localStorage.getItem(REFRESH_TOKEN)
 
-            const res = await axios.post  ("http://localhost:8000/api/login/refresh", {
+            const res = await axios.post  ("https://backend-tenant-tenure-system-u4dz.vercel.app/api/login/", {
                 refresh,
             });
             const newAccess= res.data.access
-
             localStorage.setItem(ACCESS_TOKEN,newAccess)
-
             originalRequest.headers['Authorization']= `Bearer ${newAccess}`
-
             return axiosInstance(originalRequest)
-
-
         
         }   catch(refreshError){
             console.log("Token refresh failed",refreshError)
@@ -58,8 +53,6 @@ axiosInstance.interceptors.response.use(
         }
         return Promise.reject(error)
     }
-
-
 )
 
 export default axiosInstance

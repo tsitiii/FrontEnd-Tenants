@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import AppBar from '@/components/Apppbar/AppBar';
+import { useEffect, useState } from 'react';
 import NewsCard from './NewsCard';
 import NewsHead from './NewsHead';
-import AppBar from '@/components/Apppbar/AppBar';
 
 
 const NewsPost = () => {
@@ -12,7 +12,7 @@ const NewsPost = () => {
     // Replace with your actual access token
     // const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNDY2NjAxLCJpYXQiOjE3MzA0NjU3MDEsImp0aSI6Ijg4NjI0OTgyYTE2MTQyNjY5ZTBiYTk5ODVjYTQ5YTM2IiwidXNlcl9pZCI6N30.gkvt3Ao4eJiHI042jecNE951mfG87t-bRR6tlhpCGZc';
 
-    fetch('http://localhost:8000/api/news/', {
+    fetch('https://backend-tenant-tenure-system-u4dz.vercel.app/api/news/', {
       method: 'GET',
       headers: {
         // 'Authorization': `Bearer ${accessToken}`,
@@ -39,7 +39,7 @@ const NewsPost = () => {
           <div className='h-[4px] bg-blue-900 w-full'></div>
         </div>
        <NewsCard/>
-      {/* {error ? (
+       {error ? (
         <p>Error: {error}</p>
       ) : (
         <ul>
@@ -50,7 +50,7 @@ const NewsPost = () => {
             </li>
           ))}
         </ul>
-      )} */}
+      )} 
     </div>
   );
 }

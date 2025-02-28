@@ -1,25 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
-import axios from 'axios';
 import axiosInstance from '@/Api';
 
 
- const data = [
-  { id: "Addis Ababa", value: 30 },
-  { id: "Afar", value: 2 },
-  { id: "Amhara", value: 4 },
-  { id: "Oromia", value: 5 },
-  { id: "Dire Dawa", value: 7 },
-  { id: "Gambella", value: 8 },
-  { id: "Harari", value: 6 },
-  { id: "Sidama", value: 9 },
-  { id: "Somali", value: 7 },
-  { id: "Central Ethiopian region", value: 9 },
-  { id: "South west 14", value: 7 },
-  { id: "South Ethiopia", value: 15 },
-  { id: "Benshangul Gumuz", value: 12 },
-  { id: "Tigray", value: 7 },
-];
+
 
 const DemographicsInfo = () => {
       const [regionData, setRegionData] = useState([]);

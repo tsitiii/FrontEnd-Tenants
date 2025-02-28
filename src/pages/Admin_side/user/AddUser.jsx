@@ -1,10 +1,10 @@
 
-import { useState } from 'react'
 import { Button } from "@/components/UI/button"
 import { Input } from "@/components/UI/input"
 import { Label } from "@/components/UI/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/UI/select"
-import { FaArrowCircleLeft } from "react-icons/fa";
+import { useState } from 'react'
+import { FaArrowCircleLeft } from "react-icons/fa"
 import { useNavigate } from 'react-router-dom'
 
 // import { Textarea } from "@/components/ui/textarea"
@@ -43,28 +43,30 @@ export default function AddUser() {
     }))
   }
 
+  
   const handleSubmit = async(e) => {
+    
     e.preventDefault()
-
+    console.log("Submitting form with:", formData); 
 
     const data = new FormData();
     Object.keys(formData).forEach(key => {
       data.append(key, formData[key]);
     });
-    // Here you would typically send the formData to your backend
+
     try {
-      // Send form data to the backend
-      const response = await fetch('http://localhost:8000/api/register/', {
+      const response = await fetch('https://backend-tenant-tenure-system-u4dz.vercel.app/api/register/', {
         method: 'POST',
         body: data,
       
       });
   
       if (!response.ok) {
-        // Handle error
-        console.error('Registration failed');
+        const errorData = await response.json();
+        console.error("Error Response:", errorData);
+        throw new Error(errorData.detail || "Failed to submit form");
       } else {
-        // Handle success
+
         console.log('User successfully registered');
         setFormData({
           profile_picture: null,
@@ -79,6 +81,8 @@ export default function AddUser() {
           house_number: '',
           phone: '',
           role: '',
+          kebele_ID: '',
+          file: '',
           password:'',
         });
       }
@@ -101,28 +105,16 @@ export default function AddUser() {
           <Input id="proile_picture" name="profile_picture" type="file" onChange={handleFileChange} required className = 'file:bg-blue-500 file:text-white' />
         </div>
 
-        {/* <Label htmlFor="Profile">Profile picture</Label>
-          <Input id="Profile" name="profile" type="file"   onChange={handleFileChange} required /> */}
+        <div className="space-y-1 md:w-full -mt-6">
+          <Label htmlFor="kebele_ID">kebele ID</Label>
+          <Input id="kebele_ID" name="kebele_ID" type="file" onChange={handleFileChange} required className = 'file:bg-blue-500 file:text-white' />
+        </div>
+        
+        <div className="space-y-1 md:w-full -mt-6">
+          <Label htmlFor="file">Add ownership file</Label>
+          <Input id="file" name="file" type="file" onChange={handleFileChange} required className = 'file:bg-blue-500 file:text-white' />
+        </div>
 
-        {/* </div> */}
-
-        {/* <div className="space-y-2 md:w-72 -mb-10 relative">
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleFileChange}
-              className="md:w-72 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors peer"
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="firstName"
-              className="absolute left-3 top-2 text-gray-600 transition-all duration-300 peer-focus:text-xs peer-focus:-top-2 peer-focus:left-2 peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:bg-white peer-[:not(:placeholder-shown)]:px-1">
-
-            </label>
-            </div> */}
         <div className="relative">
           <input
             type="text"

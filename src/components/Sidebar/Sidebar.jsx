@@ -1,11 +1,12 @@
-import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import HomeWorkOutlinedIcon from '@mui/icons-material/HomeWorkOutlined';
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import HomeWorkOutlinedIcon from '@mui/icons-material/HomeWorkOutlined';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import { NavLink } from 'react-router-dom';
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import { Newspaper } from "lucide-react";
 import { useEffect, useState } from 'react';
+import { Menu, MenuItem, Sidebar } from 'react-pro-sidebar';
+import { NavLink } from 'react-router-dom';
 
 
 const SideBar = () => {
@@ -44,63 +45,57 @@ const SideBar = () => {
         </h2>
         <Menu
           menuItemStyles={{
-            button: ({ active }) => {
+            button: () => {
               return {
-                display: 'flex', // Ensure proper alignment of icon and text
+                display: 'flex', 
                 alignItems: 'center',
-                borderRadius: '12px', // Curved borders for each menu item
-                transition: 'background-color 0.3s ease', // Smooth transition
+                borderRadius: '12px', 
+                transition: 'background-color 0.3s ease', 
                 '&:hover': {
-                  backgroundColor: '#4148b0', // Hover background color
-                  color: 'yellow', // Keep text color white on hover
+                  backgroundColor: '#4148b0', 
+                  color: 'yellow', 
 
                 },
               };
           }}}>
 
           <MenuItem icon={<HomeOutlinedIcon />}> <NavLink to='/admin/dashboard'
-         
-          className='text-white font-bold no-underline md:text-1xl'  exact
-           >
+          className='text-white font-bold no-underline md:text-1xl'  >
           Dashboard
           </NavLink>
            </MenuItem>
+
           <MenuItem icon={<PeopleOutlinedIcon />}>
-           <NavLink to='/admin/user'  exact
-          // className={({ isActive }) =>
-          //   `${isActive ? "text-blue-400 font-bold" : "text-blue-600"}text-white font-bold no-underline md:text-2xl`
-          // } 
-          className='text-white font-bold no-underline md:text-1xl'  
-             >
+           <NavLink to='/admin/user'
+          className='text-white font-bold no-underline md:text-1xl'  >
           User
           </NavLink> </MenuItem>
-          <MenuItem icon={<HomeWorkOutlinedIcon />}><NavLink to='/admin/houseinfo'  exact
-        // className={({ isActive }) =>
-        //   `${isActive ? "text-blue-400 font-bold" : "text-blue-600"}text-white font-bold no-underline md:text-2xl`
-        // }  
-        className='text-white font-bold no-underline md:text-1xl'  
-        >
+
+
+          <MenuItem icon={<HomeWorkOutlinedIcon />}><NavLink to='/admin/houseinfo'
+          className='text-white font-bold no-underline md:text-1xl'  >
           House Info
           </NavLink> </MenuItem>
-        
+
+
           <MenuItem icon={<CalendarTodayOutlinedIcon />}> 
-          <NavLink to='/admin/calendar'  exact
-        //  className={({ isActive }) =>
-        //   `${isActive ? "text-blue-400 font-bold" : "text-blue-600"}text-white font-bold no-underline md:text-2xl`
-        // } 
-        className='text-white font-bold no-underline md:text-1xl'  
-         >
-          Calendar
-          </NavLink>
+          <NavLink to='/admin/calendar'
+            className='text-white font-bold no-underline md:text-1xl'  >
+            Calendar </NavLink>
           </MenuItem>
+
+
+          <MenuItem icon={<Newspaper size={20} />}>
+              <NavLink to='/news'
+              className='text-white font-bold no-underline md:text-1xl' > 
+              News </NavLink>
+          </MenuItem>
+
+
           <MenuItem icon={<LockOpenOutlinedIcon />}  >
-            <NavLink to='/admin/calendar'  exact
-        //  className={({ isActive }) =>
-        //   `${isActive ? "text-blue-400 font-bold" : "text-blue-600"}text-white font-bold no-underline md:text-2xl`
-        // } 
-        className='text-white font-bold no-underline md:text-1xl'  
-         >
-          Reset Password
+            <NavLink to='/admin/calendar'
+              className='text-white font-bold no-underline md:text-1xl'  >
+              Reset Password
           </NavLink>
           </MenuItem> 
 

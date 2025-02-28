@@ -1,22 +1,21 @@
-import { Button } from "@/components/UI/button"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/UI/card"
-import { MdAppRegistration } from "react-icons/md";
-import { FaHouseUser } from "react-icons/fa";
-import { FaUserTie } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa6";
-import SideBar from '../../../components/Sidebar/Sidebar.jsx'
-import AppBar from "@/components/Apppbar/AppBar.jsx"
-import Demographics_info from "../Piechart/Demographics_info.jsx"
-import { useEffect, useState } from "react";
-import axios from "axios";
 import axiosInstance from "@/Api.jsx";
-import { useAuth } from "@/context/AuthContext.jsx";
-
+import AppBar from "@/components/Apppbar/AppBar.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/UI/card";
+import { useAuth } from "@/context/useAuth";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { FaHouseUser, FaUserTie } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa6";
+import { MdAppRegistration } from "react-icons/md";
+import SideBar from '../../../components/Sidebar/Sidebar.jsx';
+import Demographics_info from "../Piechart/Demographics_info.jsx";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const {user}= useAuth();
+
+ 
 
   useEffect(() => {
     axiosInstance
@@ -33,7 +32,7 @@ const Dashboard = () => {
         console.log("error", err);
       });
 
-    axios.get("http://localhost:8000/api/register/", {
+    axios.get("https://backend-tenant-tenure-system-u4dz.vercel.app/api/register/", {
       headers: {
         "Content-Type": "application/json"
       }
@@ -50,7 +49,7 @@ const Dashboard = () => {
     return () => clearTimeout(timer);
   }, []);
   if (loading) {
-    return <p>loDING ......</p>
+    return <p>Loading ......</p>
   }
   return (
     <>
@@ -60,32 +59,28 @@ const Dashboard = () => {
           <AppBar />
           <h2>Welcome {user.firstName} {user.fatherName}</h2>
           <div className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 ">
-            {/* Total Registration card */}
+            
             <Card className='cursor-pointer rounded-2xl flex hover:bg-[#4c7be1] text-[#2a33a8] hover:text-slate-100 ease-out delay-150 hover:scale-x-110 transition  duration-400'>
               <div className="flex justify-center items-center p-2">
                 <MdAppRegistration className="h-10 w-10 text-[#57cce7]" />
               </div>
               <div>
-                <CardHeader className="items-center pb-2">
 
-                  <CardTitle className="text-sm font-medium md:font-semibold  ">Total Registration</CardTitle>
-
+              <CardHeader className="items-center pb-2">
+              <CardTitle className="text-sm font-medium md:font-semibold  ">Total Registration</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-center">{data.total_users}</div>
-                  {/* <p className="text-xs ">+10% from last month</p> */}
                 </CardContent></div>
             </Card>
 
-
-            {/* Total Tenants card */}
             <Card className='cursor-pointer  rounded-xl flex hover:bg-[#4c6ee1] text-[#2a33a8] hover:text-slate-100 ease-out delay-150 hover:scale-x-110 transition  duration-400'>
               <div className="flex items-center p-2">
                 <FaHouseUser className="h-10 w-10 text-[#e6df58]" />
               </div>
               <div className="">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium md:font-semibold">Total Landloards registered</CardTitle>
+                  <CardTitle className="text-sm font-medium md:font-semibold">Total Landlords registered</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-center">{data.total_landlords}</div>
@@ -94,8 +89,6 @@ const Dashboard = () => {
               </div>
             </Card>
 
-
-            {/* Total Tenures card */}
             <Card className='cursor-pointer  rounded-xl flex hover:bg-[#4c6ee1] text-[#2a33a8] hover:text-slate-100 ease-out delay-150 hover:scale-x-110 transition  duration-400'>
               <div className="flex items-center p-2">
 
@@ -111,7 +104,6 @@ const Dashboard = () => {
                 </CardContent>
               </div>
             </Card>
-
 
             <Card className='cursor-pointer  rounded-xl flex hover:bg-[#4c6ee1] text-[#2a33a8] hover:text-slate-100 ease-out delay-150 hover:scale-x-110 transition  duration-400'>
               <div className="flex items-center p-2">
@@ -129,7 +121,7 @@ const Dashboard = () => {
             </Card>
           </div>
 
-          {/* <div className="grid gap-6 mb-8 md:grid-cols-2">
+           <div className="grid gap-6 mb-8 md:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>Recent Activities</CardTitle>
@@ -143,7 +135,7 @@ const Dashboard = () => {
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-green-600 rounded-full mr-2"></span>
-                    <span className="text-sm">Project "Apollo" created</span>
+                    <span className="text-sm">Project Apollo created</span>
                     <span className="text-xs text-muted-foreground ml-auto">2 hours ago</span>
                   </li>
                   <li className="flex items-center">
@@ -154,7 +146,7 @@ const Dashboard = () => {
                 </ul>
               </CardContent>
             </Card>
-          </div> */}
+          </div>
 
           <div className="w-full">
             <Card>
